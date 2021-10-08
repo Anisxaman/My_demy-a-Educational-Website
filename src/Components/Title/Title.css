@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&display=swap');
+.primary{
+    background-color: rgb(21, 20, 65);
+}
+.header{
+    text-align: center;
+    color: rgb(21, 20, 65);
+    font-weight: bolder;
+
+}
+
+.Title{
+    font-family: 'Birthstone', cursive;
+    font-size: 100px;
+}
+.focusName{
+    font-family: 'Birthstone', cursive;
+    font-size: 70px;
+
+}
+.thumb{
+    color: red;
+}

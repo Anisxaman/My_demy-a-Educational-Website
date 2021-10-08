@@ -1,0 +1,17 @@
+.instuctor{
+    color: rgb(134, 129, 129);
+    
+}
+
+
+.iccon{
+    color: rgb(112, 19, 7);
+    margin-bottom: 10px;
+}
+
+.hover:hover{
+    box-shadow: 28px 18px 63px -23px rgba(0,0,0,0.75);
+    transform: scale(1.01) ;
+    transition: transform 0.5s;
+}
+

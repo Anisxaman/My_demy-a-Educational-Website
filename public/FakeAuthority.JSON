@@ -1,0 +1,43 @@
+[
+    {
+      "id": 1,
+      "name": "The Web Develop-Ment Bootcamp 2021",
+      "price": 13.99,
+      "Instructor":"Colt Steele",
+      "img": "https://www.syncfusion.com/blogs/wp-content/uploads/2020/07/Top-6-Front-End-Web-Development-Tools-to-Increase-Your-Productivity-in-2020-1.jpg",
+      "rating": "4.5"
+    },
+    {
+      "id": 2,
+      "name": "The Complete javascript Course-2021",
+      "price": 15.99,
+      "Instructor":"Jonas Scamettmann",
+      "img": "https://cdn.mos.cms.futurecdn.net/EzgdmaCQuT84bgDL4fhXZS-970-80.jpg.webp",
+      "rating": "4.7"
+    },
+    {
+      "id": 3,
+      "name": "Angular-The Complete Guideline",
+      "price": 20000,
+      "Instructor":"Colt Steele",
+      "img": "https://www.syncfusion.com/blogs/wp-content/uploads/2020/07/Top-6-Front-End-Web-Development-Tools-to-Increase-Your-Productivity-in-2020-1.jpg",
+      "rating": "2.4"
+    },
+    {
+      "id": 4,
+      "name": "Modern React with Redux",
+      "price": 20000,
+      "Instructor":"Colt Steele",
+      "img": "https://www.syncfusion.com/blogs/wp-content/uploads/2020/07/Top-6-Front-End-Web-Development-Tools-to-Increase-Your-Productivity-in-2020-1.jpg",
+      "rating": "3.4"
+    },
+    {
+      "id": 5,
+      "name": "Build Responsive real word  website with CSS and HTML",
+      "price": 20000,
+      "Instructor":"Colt Steele",
+      "img": "https://www.syncfusion.com/blogs/wp-content/uploads/2020/07/Top-6-Front-End-Web-Development-Tools-to-Increase-Your-Productivity-in-2020-1.jpg",
+      "rating": "4.3"
+    }
+    
+  ]

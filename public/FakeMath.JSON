@@ -1,0 +1,43 @@
+[
+    {
+      "id": 1,
+      "name": "Quaradratic Equation",
+      "price": 13.99,
+      "Instructor":"Colt Steele",
+      "img": "https://i1.wp.com/www.additudemag.com/wp-content/uploads/2021/09/GettyImages-1044168372.jpg?resize=1280%2C720px&ssl=1",
+      "rating": "4.5"
+    },
+    {
+      "id": 2,
+      "name": "theorem",
+      "price": 15.99,
+      "Instructor":"Jonas Scamettmann",
+      "img": "http://sms.ssd6.org/files/2016/08/math-768x548.jpg",
+      "rating": "4.7"
+    },
+    {
+      "id": 3,
+      "name": "trigonometry",
+      "price": 20000,
+      "Instructor":"Colt Steele",
+      "img": "https://demmelearning.com/wp-content/uploads/2020/07/Make-Math-Engaging-for-Kids-with-Philosophy-.png",
+      "rating": "2.4"
+    },
+    {
+      "id": 4,
+      "name": "geoMetry",
+      "price": 20000,
+      "Instructor":"Colt Steele",
+      "img": "https://www.mathcad.com/-/media/Images/Mathcad/homepage/mathcad-virtual-conference-856x602.png",
+      "rating": "3.4"
+    },
+    {
+      "id": 5,
+      "name": "Patiginit",
+      "price": 20000,
+      "Instructor":"Colt Steele",
+      "img": "https://bhi61nm2cr3mkdgk1dtaov18-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/beautiful-math.jpg",
+      "rating": "4.3"
+    }
+    
+  ]
