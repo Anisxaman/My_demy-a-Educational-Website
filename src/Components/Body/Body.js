@@ -13,19 +13,19 @@ const Body = (props) => {
 
 
         <div className="col-lg-4 col-12 ">
-        <div class="card mb-3  " style={{maxWidth: "540px",height:"380px",borderRadius:"30px"}}>
+        <div className="card mb-3  " style={{maxWidth: "540px",height:"380px",borderRadius:"30px"}}>
             <div class="row g-0  hover rounded-3">
                 
-                <div class="col-md-5 col-12">
+                <div className="col-md-5 col-12">
                 <img src={img} style={{height:"380px"}} className="img-fluid rounded-start" alt="not found"/>
                     
                 </div>
-                <div class="col-md-7 col-12 ">
-                <div class="card-body">
-                    <h3 class="card-title fw-bolder">{name}</h3>
-                    <h5 class="card-title fw-bolder instuctor">{Instructor}</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text fs-5"><small class="text-muted">${price}</small></p>
+                <div className="col-md-7 col-12 ">
+                <div className="card-body">
+                    <h3 classNames="card-title fw-bolder">{name}</h3>
+                    <h5 className="card-title fw-bolder instuctor">{Instructor}</h5>
+                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p className="card-text fs-5"><small class="text-muted">${price}</small></p>
                     
 
                    

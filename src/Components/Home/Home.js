@@ -37,7 +37,7 @@ const getData=data.slice(0,5);
            <Title></Title>
 
             <div className="row cart">
-                <div className="fs-1 border rounded-3 fw-bold p-5">Web development Course <button onClick={useHandler} type="button" class="btn btn-secondary">Show Details <FontAwesomeIcon icon={faArrowAltCircleRight}></FontAwesomeIcon></button>
+                <div className="fs-1 border rounded-3 fw-bold p-5">Web development Course <button onClick={useHandler} type="button" className="btn btn-secondary">Show Details <FontAwesomeIcon icon={faArrowAltCircleRight}></FontAwesomeIcon></button>
                 
     </div>
             {
