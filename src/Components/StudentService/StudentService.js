@@ -1,7 +1,7 @@
 import "./StudentService.css"
 
 import React from 'react';
-import { getAuth, GoogleAuthProvider, signInWithPopup,GithubAuthProvider, signOut } from "@firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup,GithubAuthProvider, signOut,createUserWithEmailAndPassword  } from "@firebase/auth";
 import initializeAuthentication from "../../firebase/firebase.initialize";
 import { useState } from "react";
 
@@ -14,8 +14,15 @@ const provider = new GoogleAuthProvider();
 const Gitprovider = new GithubAuthProvider();
 
 const StudentService = () => {
+
 const [user,setuser]=useState({})
 
+// ---------------state for email---------------
+
+const [email, setemail] = useState("");
+// ---------------state for password---------------
+
+const [passWord, setpassWord] = useState("");
 
 
 
@@ -86,6 +93,9 @@ const  handleGitSignin=()=>{
  }
 
 
+
+
+
  //-----------------------signout----------------------------------
 const  handleSignout=()=>{
   const auth = getAuth();
@@ -95,6 +105,39 @@ signOut(auth).then(() => {
   // An error happened.
 });
 
+}
+
+
+// ------------------------------------submit event handler for  email--------------------------
+
+const handleRegistration=(e)=>{
+  e.preventDefault(); ///form by default reload hoi .ta bondo jorte preventDefault
+  const auth = getAuth();
+
+  createUserWithEmailAndPassword(auth, email, passWord)
+  .then((result) => {
+        // Signed in 
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        // ..
+      });
+
+}
+
+
+// --------------------------------handle email change------------------------
+const handleEmailChange=e=>{
+  setemail(e.target.value);
+}
+
+
+// --------------------------------handle password change------------------------
+const handlePassChange=e=>{
+  // console.log(e.target.value);
+  setpassWord(e.target.value);
 }
 
 
@@ -123,54 +166,74 @@ signOut(auth).then(() => {
 
         <div>
 
-        <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">User Name</span>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
+        <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">User Name</span>
+                <input type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
               </div>
 
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                <span class="input-group-text" id="basic-addon2">Email</span>
+              <div className="input-group mb-3">
+                <input type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                <span className="input-group-text" id="basic-addon2">Email</span>
               </div>
 
-              <label for="basic-url" class="form-label">Your vanity URL</label>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+              <label htmlFor="basic-url" className="form-label">Your vanity URL</label>
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon3">https://example.com/users/</span>
+                <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3"/>
               </div>
 
-              <div class="input-group mb-3">
-                <span class="input-group-text">$</span>
-                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"/>
-                <span class="input-group-text">.00</span>
+              <div className="input-group mb-3">
+                <span className="input-group-text">$</span>
+                <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)"/>
+                <span className="input-group-text">.00</span>
               </div>
 
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username"/>
-                <span class="input-group-text">@</span>
-                <input type="text" class="form-control" placeholder="Server" aria-label="Server"/>
+              <div className="input-group mb-3">
+                <input type="text" className="form-control" placeholder="Username" aria-label="Username"/>
+                <span className="input-group-text">@</span>
+                <input type="text" className="form-control" placeholder="Server" aria-label="Server"/>
               </div>
 
-              <div class="input-group">
-                <span class="input-group-text">Comment</span>
-                <textarea class="form-control" aria-label="With textarea"></textarea>
+              <div className="input-group">
+                <span className="input-group-text">Comment</span>
+                <textarea className="form-control" aria-label="With textarea"></textarea>
               </div>
             
         </div>
 
+  {/*----------------------------------- create form ------------------------------------------------*/}
+        <form onSubmit={handleRegistration} action="">
+          <h3>please registar</h3>
+          <br /><br /><br />
+          <div>
+                  <label htmlFor="email">Email:   </label>
+                
+                <input onBlur={handleEmailChange} type="email" name="email"  required/>
+          </div>
+          <br />
+          <div>
+          <label htmlFor="password">Password</label>
+          <input onBlur={handlePassChange} type="password"  required/>
+
+          <input type="submit" value="submit" />
+          </div>
+
+         
+        </form>
+
 
         <div className="text-center p-5">
-        <button type="button" class="btn btn-info me-5">Register</button>
-        {/* <button type="button" class="btn btn-danger">Sign in</button> */}
+        <button type="button" className="btn btn-info me-5">Register</button>
+        {/* <button type="button" className="btn btn-danger">Sign in</button> */}
 
-        {/*---------------------- conditional signin signOut button ----------------*/}
+  {/*------------------------------ conditional signin signOut button ----------------------------*/}
        {!user.name?
          <div>
-            <button onClick={ handleGoogleSignin} type="button" class="btn btn-danger">Sign in</button>
+            <button onClick={ handleGoogleSignin} type="button" className="btn btn-danger">Sign in</button>
               <br />
-              <button onClick={ handleGitSignin} type="button" class="btn btn-danger">Git Sign in</button>
+              <button onClick={ handleGitSignin} type="button" className="btn btn-danger">Git Sign in</button>
        </div>:
-        <button onClick={ handleSignout} type="button" class="btn btn-danger">Sign out</button>}
+        <button onClick={ handleSignout} type="button" className="btn btn-danger">Sign out</button>}
 
 {/* ----------------------------display inf0 -----------------------*/}
         {

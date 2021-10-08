@@ -14,7 +14,7 @@ const Body = (props) => {
 
         <div className="col-lg-4 col-12 ">
         <div className="card mb-3  " style={{maxWidth: "540px",height:"380px",borderRadius:"30px"}}>
-            <div class="row g-0  hover rounded-3">
+            <div className="row g-0  hover rounded-3">
                 
                 <div className="col-md-5 col-12">
                 <img src={img} style={{height:"380px"}} className="img-fluid rounded-start" alt="not found"/>
@@ -25,7 +25,7 @@ const Body = (props) => {
                     <h3 classNames="card-title fw-bolder">{name}</h3>
                     <h5 className="card-title fw-bolder instuctor">{Instructor}</h5>
                     <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p className="card-text fs-5"><small class="text-muted">${price}</small></p>
+                    <p className="card-text fs-5"><small className="text-muted">${price}</small></p>
                     
 
                    
@@ -43,7 +43,7 @@ const Body = (props) => {
                        fullSymbol="fas fa-star"
                         readonly/>
 
-                <button type="button" class="btn btn-danger ms-3"><FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>Add Cart</button>
+                <button type="button" className="btn btn-danger ms-3"><FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>Add Cart</button>
 
                    </div>
                    
