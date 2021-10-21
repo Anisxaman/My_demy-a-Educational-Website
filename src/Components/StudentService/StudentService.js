@@ -1,7 +1,7 @@
 import "./StudentService.css"
 
 import React from 'react';
-import { getAuth, GoogleAuthProvider, signInWithPopup,GithubAuthProvider, signOut,createUserWithEmailAndPassword  } from "@firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup,GithubAuthProvider, signOut,createUserWithEmailAndPassword ,signInWithEmailAndPassword ,sendEmailVerification,sendPasswordResetEmail, updateProfile,FacebookAuthProvider } from "@firebase/auth";
 import initializeAuthentication from "../../firebase/firebase.initialize";
 import { useState } from "react";
 
@@ -12,6 +12,7 @@ initializeAuthentication();
 
 const provider = new GoogleAuthProvider();
 const Gitprovider = new GithubAuthProvider();
+const FacebookProvider = new FacebookAuthProvider();
 
 const StudentService = () => {
 
@@ -24,8 +25,34 @@ const [email, setemail] = useState("");
 
 const [passWord, setpassWord] = useState("");
 
+const [error, seterror] = useState("");
+
+const [isLogin, setisLogin] = useState(false);
+
+const [name, setname] = useState("");
 
 
+// ----------------------------namechange----------------------
+const handleNameChange=(e)=>{
+  setname(e.target.value);
+
+}
+
+
+const setUsername=()=>{
+  const auth = getAuth();
+updateProfile(auth.currentUser, {
+  displayName: name, photoURL: "https://example.com/jane-q-user/profile.jpg"
+}).then(() => {
+  // Profile updated!
+  // ...
+}).catch((error) => {
+  // An error occurred
+  // ...
+});
+
+
+}
 
 
 
@@ -92,6 +119,30 @@ const  handleGitSignin=()=>{
 
  }
 
+//------------------------------------  facebook signin--------------------------
+
+const handleFacebookSignin=()=>{
+  const auth = getAuth();
+signInWithPopup(auth,FacebookProvider)
+  .then((result) =>
+   {const {displayName,email,photoURL} = result.user;
+  const logInUser={
+    name:displayName,
+    email:email,
+    photo:photoURL
+  };
+ 
+ console.log(logInUser);
+ setuser(logInUser);
+})
+.catch((error) => {
+
+  console.log(error.message);
+});
+
+   
+}
+
 
 
 
@@ -113,36 +164,109 @@ signOut(auth).then(() => {
 const handleRegistration=(e)=>{
   e.preventDefault(); ///form by default reload hoi .ta bondo jorte preventDefault
   const auth = getAuth();
+  if(passWord.length<6){
+    seterror("Password must in 6 character long")
+    return;
+  }
 
-  createUserWithEmailAndPassword(auth, email, passWord)
-  .then((result) => {
-        // Signed in 
-        const user = result.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        // ..
-      });
+  // --------------------------------case handle-------------------------------------
+  if(!/(?=.*?[A-Z])/.test(passWord)){
+    seterror("password must contain upper case");
+    return;
+  }
+
+
+
+  const processLogin=(email,passWord)=>{
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth,email,passWord)
+    .then(result=>{
+      const user=result.user;
+      console.log(user);
+      // seterror("");
+
+
+    })
+    .catch((error) => {
+  seterror(error.message);
+    } 
+    );
+    
+
+  }
+  
+  
+  
+  const newUser=(email,passWord)=>{
+    createUserWithEmailAndPassword(auth, email, passWord)
+    .then((result) => {
+          // Signed in 
+          const user = result.user;
+          console.log(user);
+          seterror("");
+          verifyEmail();
+          setUsername();
+        })
+        .catch((error) => {
+          console.log(error.message);
+          // ..
+        });
 
 }
 
 
-// --------------------------------handle email change------------------------
+isLogin? processLogin(email,passWord):newUser(email,passWord);
+
+}
+
+
+
+
+const toggleLogin=(e)=>{
+  setisLogin(e.target.checked);
+
+}
+
+
+
+
+// --------------------------------handle get email ------------------------
 const handleEmailChange=e=>{
   setemail(e.target.value);
 }
 
 
-// --------------------------------handle password change------------------------
+// --------------------------------handle get password ------------------------
 const handlePassChange=e=>{
   // console.log(e.target.value);
   setpassWord(e.target.value);
 }
 
 
+const verifyEmail=()=>{
+  const auth = getAuth();
+sendEmailVerification(auth.currentUser)
+  .then((result) => {
+    // Email verification sent!
+    console.log(result);
+  });
+}
 
 
+//-------------------------------------------------- password reset---------------------------
+const handleresetPassword=()=>{
+  const auth = getAuth();
+sendPasswordResetEmail(auth, email)
+  .then(() => {
+    // Password reset email sent!
+    // ..
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+}
 
 
 
@@ -158,6 +282,7 @@ const handlePassChange=e=>{
     
 
        <div className="container ">
+
        <div className="text-center" style={{marginTop:"250px"}}>
                     <h1 className="text-primary fs-1 fw-bold">Are you a Student??</h1>
                     <h3 className="text-danger">Please Registration for <span className="fs-1 text danger"> Free</span></h3>
@@ -165,6 +290,12 @@ const handlePassChange=e=>{
         </div>
 
         <div>
+          {!isLogin &&
+
+      <div class="col-12">
+          <label for="inputAddress" className="form-label">Name</label>
+          <input type="text" onBlur={handleNameChange} class="form-control" id="inputAddress" placeholder=" Input your name"/>
+      </div>}
 
         <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">User Name</span>
@@ -203,8 +334,10 @@ const handlePassChange=e=>{
 
   {/*----------------------------------- create form ------------------------------------------------*/}
         <form onSubmit={handleRegistration} action="">
-          <h3>please registar</h3>
+          <h3>please {isLogin?" login ":" registrate"}</h3>
           <br /><br /><br />
+
+          <button onClick={handleresetPassword} type="button" className="btn btn-secondary btn-sm">Reset password</button>
           <div>
                   <label htmlFor="email">Email:   </label>
                 
@@ -214,12 +347,22 @@ const handlePassChange=e=>{
           <div>
           <label htmlFor="password">Password</label>
           <input onBlur={handlePassChange} type="password"  required/>
-
+{/*--------------------------- submit button add ---------------------------------------*/}
           <input type="submit" value="submit" />
           </div>
 
+          {/*--------------------- checkbutton --------------------*/}
+          <input onChange={toggleLogin}  className="form-check-input" type="checkbox" id="gridCheck1" />
+
+          <label className="form-check-label" htmlFor="gridCheck1">
+            Already Registered?
+          </label>
+
          
         </form>
+        <div className="text-danger">
+          {error}
+        </div>
 
 
         <div className="text-center p-5">
@@ -228,12 +371,13 @@ const handlePassChange=e=>{
 
   {/*------------------------------ conditional signin signOut button ----------------------------*/}
        {!user.name?
-         <div>
-            <button onClick={ handleGoogleSignin} type="button" className="btn btn-danger">Sign in</button>
+         <div className="me-5">
+            <button onClick={ handleGoogleSignin} type="button" className="btn btn-danger my-3">google Sign in</button>
               <br />
               <button onClick={ handleGitSignin} type="button" className="btn btn-danger">Git Sign in</button>
+              <button onClick={ handleFacebookSignin} type="button" className="btn btn-danger m-5">Facebook Sign in</button>
        </div>:
-        <button onClick={ handleSignout} type="button" className="btn btn-danger">Sign out</button>}
+        <button onClick={ handleSignout} type="button" className="btn btn-danger m-5">Sign out</button>}
 
 {/* ----------------------------display inf0 -----------------------*/}
         {
@@ -254,3 +398,9 @@ const handlePassChange=e=>{
 };
 
 export default StudentService;
+
+
+
+
+
+// -----------------------57.4 finish----------

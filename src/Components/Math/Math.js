@@ -11,7 +11,7 @@ const Math = (props) => {
 
     return (
         <>
-  <div className="col-3">
+  <div className="col-lg-4 col-sm-3 col-12">
     <div className="card hover" style={{height:"420px",borderRadius:"30px"}}   >
       <img  height="200px" src={img} className="card-img-top" alt="..."/>
       <div className="card-body">

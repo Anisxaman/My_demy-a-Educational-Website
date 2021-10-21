@@ -34,32 +34,43 @@ console.log(data);
 const getData=data.slice(0,5);
     return (
         <>
-           <Title></Title>
+        <div className="overflow-hidden">
+        <Title></Title>
 
-            <div className="row cart">
-                <div className="fs-1 border rounded-3 fw-bold p-5">Web development Course <button onClick={useHandler} type="button" className="btn btn-secondary">Show Details <FontAwesomeIcon icon={faArrowAltCircleRight}></FontAwesomeIcon></button>
-                
-    </div>
-            {
-                getData.map(item=><Body
-                key={item.id}
-                item={item}                
-                >
+<div>
+    <div className="fs-1 border rounded-3 fw-bold p-5">Web development Course <button onClick={useHandler} type="button" className="btn btn-secondary">Show Details <FontAwesomeIcon icon={faArrowAltCircleRight}></FontAwesomeIcon></button>
+    
+</div>
 
-                </Body>
-                
-                
-                )
-            } 
-            </div>
-         
+<div  className="row cart">
+{
+    getData.map(item=><Body
+    key={item.id}
+    item={item}                
+    >
 
-            
-            
-            
-            
-            <Topics></Topics>
-            <Instructor></Instructor>
+    </Body>
+    
+    
+    )
+} 
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+<Topics></Topics>
+<Instructor></Instructor>
+
+        </div>
+          
 
 
 

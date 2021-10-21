@@ -71,7 +71,7 @@ console.log("here")
 
 
             <div>
-            <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="row g-4">
                 {
                     data.map(item=><Body
                         key={item.id}
